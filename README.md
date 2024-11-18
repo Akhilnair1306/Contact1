@@ -67,7 +67,7 @@ Ensure you have the following installed on your system:
 
    The backend server will run on `http://localhost:5000`.
 
-    **Note:** I have used MongoDb Compass for data storing Atlas could also be used.
+    **Note:** I have used MongoDb Compass for data storing MongoDb Atlas could also be used.
 
 ### Database Schema
 
