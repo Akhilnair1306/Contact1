@@ -10,6 +10,7 @@ import {
   TableRow,
   Paper,
   IconButton,
+  TablePagination,
 } from "@mui/material";
 
 const ContactTable = () => {
@@ -17,6 +18,8 @@ const ContactTable = () => {
   const [loading, setLoading] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
   const [currentRow, setCurrentRow] = useState(null);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -48,15 +51,11 @@ const ContactTable = () => {
     );
   };
 
-
   const handleDelete = async (id) => {
     const isConfirmed = window.confirm("Are you sure you want to delete this contact?");
     if (!isConfirmed) return;
 
-    console.log("Delete clicked for ID:", id);
-
     try {
-
       const response = await fetch(`http://localhost:5000/api/contact/${id}`, {
         method: "DELETE",
         headers: {
@@ -69,14 +68,23 @@ const ContactTable = () => {
       }
 
       const result = await response.json();
-
-      console.log("Deleted contact:", result);
-
       setRows(rows.filter((row) => row._id !== id));
     } catch (error) {
       console.error("Error deleting contact:", error);
     }
   };
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0); 
+  };
+
+
+  const paginatedRows = rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 
   if (loading) {
     return <p className="text-center text-lg font-semibold">Loading...</p>;
@@ -111,7 +119,7 @@ const ContactTable = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row) => (
+              {paginatedRows.map((row) => (
                 <TableRow key={row._id} hover>
                   <TableCell>{row.fname}</TableCell>
                   <TableCell>{row.lname}</TableCell>
@@ -137,6 +145,16 @@ const ContactTable = () => {
             </TableBody>
           </Table>
         </TableContainer>
+
+        <TablePagination
+          rowsPerPageOptions={[5]}
+          component="div"
+          count={rows.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
       </div>
     </div>
   );

@@ -61,7 +61,7 @@ const EditForm = ({rowData, setIsEditing,updateRowData}) => {
       
           const result = await response.json();
       
-          console.log("Updated contact:", result);
+          //console.log("Updated contact:", result);
       
           setIsEditing(false);
       
