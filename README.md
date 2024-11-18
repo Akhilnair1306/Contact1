@@ -20,7 +20,7 @@ This is a contact management web application that allows users to create, edit, 
 ### Prerequisites
 Ensure you have the following installed on your system:
 - **Node.js** (v12 or above)
-- **MongoDB** (or use a cloud service like MongoDB Atlas)
+- **MongoDB Compass** 
 
 ### Frontend Setup
 1. Clone the repository:
@@ -66,6 +66,8 @@ Ensure you have the following installed on your system:
     ```
 
    The backend server will run on `http://localhost:5000`.
+
+    **Note:** I have used MongoDb Compass for data storing Atlas could also be used.
 
 ### Database Schema
 
@@ -122,8 +124,11 @@ module.exports = mongoose.model('Contact', contactSchema);
 ### Backend API Endpoints
 
 -**GET /api/contact:** Fetch all contacts
+
 -**POST /api/contact:** Add a new contact
+
 -**PUT /api/contact/:** Update an existing contact
+
 -**DELETE /api/contact/:** Delete a contact by ID
 
 ### How the App Works
