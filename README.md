@@ -118,3 +118,22 @@ const contactSchema = new mongoose.Schema({
 });
 
 module.exports = mongoose.model('Contact', contactSchema);
+```
+### Backend API Endpoints
+
+-**GET /api/contact:** Fetch all contacts
+-**POST /api/contact:** Add a new contact
+-**PUT /api/contact/:** Update an existing contact
+-**DELETE /api/contact/:** Delete a contact by ID
+
+### How the App Works
+**Frontend (React):** The frontend sends HTTP requests (GET, POST, PUT, DELETE) to the backend API to interact with the contact data. It uses React state to render contact details dynamically.
+
+**Backend (Node.js/Express):** The backend provides API endpoints for CRUD operations and communicates with MongoDB using Mongoose to store and retrieve contact data.
+
+**MongoDB:** The database stores the contact information, ensuring that the app is able to persist data even after the app is closed or refreshed.
+
+### Troubleshooting
+**Cannot Connect to MongoDB:** Ensure MongoDB is running locally or use a service like MongoDB Atlas. Check your .env configuration.
+
+**Form Validation Issues:** If you are getting errors on the form, ensure that the email and phone number fields match the specified patterns.
